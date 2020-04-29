@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const StyledButton = styled.button`
-  background-color: tan;
-`;
-
-const StyledLabel = styled.div`
-  color: dodger-blue;
-`;
-
 const initialTeam = [
   {
     id: 0,
@@ -72,7 +64,35 @@ function Form() {
       role: formValues.role,
     };
     setTeam([...team, newMember]);
+    setFormValues({
+      fname: "",
+      lname: "",
+      email: "",
+      role: "",
+    });
   };
+
+  const StyledDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: left;
+    padding: 1%;
+  `;
+  const StyledName = styled.div`
+    margin-right: 4px;
+    font-size: 1.2rem;
+    margin-bottom: 3px;
+  `;
+  const StyledInfo = styled.div`
+    display: flex;
+  `;
+
+  const StyledTitle = styled.h1`
+    display: flex;
+    margin-top: 3%;
+  `;
+
   return (
     <div className="App">
       <form onSubmit={onFormSubmit}>
@@ -87,7 +107,7 @@ function Form() {
             placeholder="first name"
           />
         </label>
-        <br />
+
         <label>
           {" "}
           Last Name
@@ -99,7 +119,7 @@ function Form() {
             placeholder="last name"
           />
         </label>
-        <br />
+
         <label>
           {" "}
           Email Address
@@ -111,7 +131,7 @@ function Form() {
             placeholder="email"
           />
         </label>
-        <br />
+
         <label>
           {" "}
           Role
@@ -123,14 +143,18 @@ function Form() {
             placeholder="role"
           />
         </label>
-        <br />
-        <StyledButton type="submit">Submit</StyledButton>
+
+        <button type="submit">Submit</button>
       </form>
-      <h1>The Team</h1>
+      <StyledTitle>The Team</StyledTitle>
       {team.map((tm) => (
-        <div key={tm.id}>
-          {tm.fname} {tm.lname} {tm.email} {tm.role}
-        </div>
+        <StyledDiv key={tm.id}>
+          <StyledName>
+            {tm.fname} {tm.lname}
+          </StyledName>
+          <StyledInfo>{tm.email}</StyledInfo>
+          <StyledInfo>{tm.role}</StyledInfo>
+        </StyledDiv>
       ))}
     </div>
   );
